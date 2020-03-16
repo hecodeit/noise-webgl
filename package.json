@@ -1,0 +1,20 @@
+{
+  "name": "noise-webgl",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dev.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hecodeit/noise-webgl.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hecodeit/noise-webgl/issues"
+  },
+  "homepage": "https://github.com/hecodeit/noise-webgl#readme"
+}
