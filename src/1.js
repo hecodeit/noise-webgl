@@ -5,8 +5,8 @@ document.body.appendChild(canvas);
 var width, height, pixelRatio;
 
 function resize () {
-  width = 320;
-  height = 320;
+  width = 640;
+  height = 640;
   pixelRatio = window.devicePixelRatio;
 
   canvas.width = width * pixelRatio;
