@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node dev.js"
+    "start": "node dev.js",
+    "build": "node build.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,12 @@
   "bugs": {
     "url": "https://github.com/hecodeit/noise-webgl/issues"
   },
-  "homepage": "https://github.com/hecodeit/noise-webgl#readme"
+  "homepage": "https://github.com/hecodeit/noise-webgl#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.8.7",
+    "babelify": "^10.0.0"
+  },
+  "dependencies": {
+    "@babel/core": "^7.8.7"
+  }
 }

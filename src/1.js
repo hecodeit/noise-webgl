@@ -1,5 +1,5 @@
-var canvas = document.createElement('canvas');
-var context = canvas.getContext('2d');
+const canvas = document.createElement('canvas');
+const context = canvas.getContext('2d');
 document.body.appendChild(canvas);
 
 var width, height, pixelRatio;
