@@ -19,5 +19,5 @@ b.transform(uglifyify, { global: true  })
 b.bundle()
 .pipe(fs.createWriteStream('static/' + entryFilename))
 
-html({ title: entry, entry: entryFilename })
+html({ title: entry, entry: entryFilename, css: '../main.css' })
   .pipe(fs.createWriteStream('static/' + entry + '.html'))
