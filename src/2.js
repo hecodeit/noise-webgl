@@ -1,3 +1,5 @@
+// nippon-colors visulization
+
 // create canvas
 const canvas = document.createElement('canvas');
 const context = canvas.getContext('2d');
@@ -24,7 +26,7 @@ function randomColorDraw(){
   context.textAlign = "center";
 
 	context.font = subTitleHeight + 'px sans-serif';
-	context.fillText(colorIndex, canvas.width/2, canvas.height/2 - totalHeight / 2 + titleHeight / 2 - titleHeight);
+	context.fillText(nipponColor.value, canvas.width/2, canvas.height/2 - totalHeight / 2 + titleHeight / 2 - titleHeight);
 
   context.font = titleHeight + 'px sans-serif';
   context.fillText(nipponColor.name, canvas.width/2, canvas.height/2 - totalHeight / 2 + titleHeight / 2);
