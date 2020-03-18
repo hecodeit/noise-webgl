@@ -53,6 +53,7 @@ function init(){
 
 init();
 
+window.addEventListener('touchmove', function(e){ e.preventDefault(); });
 window.addEventListener('resize', resize, false);
 window.addEventListener("mousedown", randomColorDraw, { passive: false });
 window.addEventListener("touchstart", randomColorDraw, { passive: false });
