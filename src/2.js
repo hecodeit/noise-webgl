@@ -3,16 +3,14 @@ const canvas = document.createElement('canvas');
 const context = canvas.getContext('2d');
 document.body.appendChild(canvas);
 
+// colors
+const nipponColors = require('nippon-colors-gen');
 // size
 var width, height, pixelRatio;
 
-const nipponColor = {
-	"name": "銀鼠",
-	"romanized": "GINNEZUMI",
-	"value": "#91989F"
-};
-
-function colorDraw(){
+function randomColorDraw(){
+	const colorIndex = Math.floor(Math.random() * nipponColors.length);
+	const nipponColor = nipponColors[colorIndex];
   // draw background
   context.fillStyle = nipponColor.value;
   context.fillRect(0, 0, canvas.width, canvas.height);
@@ -24,6 +22,9 @@ function colorDraw(){
 
   context.fillStyle = "white";
   context.textAlign = "center";
+
+	context.font = subTitleHeight + 'px sans-serif';
+	context.fillText(colorIndex, canvas.width/2, canvas.height/2 - totalHeight / 2 + titleHeight / 2 - titleHeight);
 
   context.font = titleHeight + 'px sans-serif';
   context.fillText(nipponColor.name, canvas.width/2, canvas.height/2 - totalHeight / 2 + titleHeight / 2);
@@ -42,14 +43,16 @@ function resize() {
   canvas.style.width = `${width}px`;
   canvas.style.height = `${height}px`;
 
-  colorDraw();
+  randomColorDraw();
 }
 
 function init(){
   resize();
-  colorDraw();
+  randomColorDraw();
 }
 
 init();
 
 window.addEventListener('resize', resize, false);
+window.addEventListener("mousedown", randomColorDraw, { passive: false });
+window.addEventListener("touchstart", randomColorDraw, { passive: false });
