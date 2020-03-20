@@ -27,16 +27,14 @@ function draw(){
   // draw line
   context.beginPath()
 
-  let sideCount = Math.round(Math.random()*15)
+  let sideCount = Math.round(Math.random()*10-5)
   for(let a=0; a<Math.PI*2; a+=Math.PI*2/180){
 
     // sin loop
-    // const offset = map_range(Math.sin(a * sideCount), -1, 1, -40, 40)
-    // const radius = 200 + offset
-    // const radius = 59 + Math.random()*30 - 60 + radiusIncrement
+    // const offset = map_range(Math.sin(a * sideCount + 36/sideCount+frameCount), -1, 1, 1, 1.2)
+    // const radius = 400 * offset + map_range(Math.sin(frameCount), -1, 1, -200, 0)
 
     // SimplexNoise
-
     const xoff = map_range(Math.cos(a), -1, 1, 0, 2)
     const yoff = map_range(Math.sin(a), -1, 1, 0, 2)
     const radius = map_range(simplex.noise3D(xoff, yoff, frameCount), 0, 1, 300, 330)
@@ -48,7 +46,7 @@ function draw(){
     context.lineTo(x, y)
   }
   // context.closePath()
-  context.strokeStyle = 'rgba(255,255,255,0.5)'
+  context.strokeStyle = 'rgba(255,255,255,0.7)'
   context.stroke()
 
   radiusIncrement+=1
@@ -57,7 +55,7 @@ function draw(){
 
 function animate(){
   requestAnimationFrame(animate)
-  context.globalAlpha = 0.05;
+  context.globalAlpha = 0.04;
   context.translate(-canvas.width/2, -canvas.height/2)
   context.fillStyle = '#3C2F41'
   context.fillRect(0, 0, canvas.width, canvas.height)
