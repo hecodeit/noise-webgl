@@ -49,7 +49,6 @@ function draw(){
     const x = Math.cos(a) * radius
     const y = Math.sin(a) * radius
     context.lineTo(x, y)
-    console.log(radius)
   }
   // context.closePath()
   context.strokeStyle = 'rgba(255,255,255,0.5)'
@@ -71,6 +70,7 @@ function animate(){
 }
 
 function init(){
+  frameCount = 0;
   resize();
 
   context.fillStyle = 'white';
@@ -82,7 +82,9 @@ function init(){
   context.translate(canvas.width/2, canvas.height/2)
 
   draw()
-  animate()
 }
 
 init()
+animate()
+
+window.addEventListener('resize', init, false)
