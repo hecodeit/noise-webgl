@@ -3,10 +3,7 @@ const canvas = document.createElement('canvas')
 document.body.appendChild(canvas)
 const context = canvas.getContext('2d')
 var SimplexNoise = require('simplex-noise')
-
 var simplex = new SimplexNoise(Math.random)
-// gui
-const dat = require('dat.gui')
 
 // variable
 let width, height, pixelRatio
