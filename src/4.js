@@ -46,7 +46,7 @@ function draw(){
     context.lineTo(x, y)
   }
   // context.closePath()
-  context.strokeStyle = 'rgba(255,255,255,0.7)'
+  context.strokeStyle = 'rgba(0,0,0,0.7)'
   context.stroke()
 
   radiusIncrement+=1
@@ -57,7 +57,7 @@ function animate(){
   requestAnimationFrame(animate)
   context.globalAlpha = 0.04;
   context.translate(-canvas.width/2, -canvas.height/2)
-  context.fillStyle = '#3C2F41'
+  context.fillStyle = 'white'
   context.fillRect(0, 0, canvas.width, canvas.height)
   context.translate(canvas.width/2, canvas.height/2)
   context.globalAlpha = 1;
@@ -68,7 +68,7 @@ function init(){
   frameCount = 0;
   resize();
 
-  context.fillStyle = 'white';
+  context.fillStyle = 'black';
   context.fillRect(0, 0, canvas.width, canvas.height);
 
   context.lineWidth = pixelRatio*2

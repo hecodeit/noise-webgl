@@ -41,7 +41,7 @@ function draw(){
   for(let i=0; i<canvas.width; i+=10){
     context.lineTo(i, wave.y + Math.sin(i*wave.length+increment)*wave.amp*Math.sin(increment));
   }
-  context.strokeStyle = 'hsl(223,77%,29%)';
+  context.strokeStyle = 'black';
   context.stroke();
 
   increment += wave.freq;
