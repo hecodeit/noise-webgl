@@ -61,11 +61,11 @@ function circle3(x, y, r, tIncrement){
 // fill with circles
 function circle4(x, y, r){
   let rt = Math.random()*Math.PI*2
-  for(let a=0; a<2*r; a+=Math.random()*30+1){
+  for(let a=0.3; a<2*r; a+=Math.random()*30+1){
     context.beginPath()
     const xoff = Math.cos(rt) * (r-a/2) + x
     const yoff = Math.sin(rt) * (r-a/2) + y
-    context.arc(xoff, yoff, a/2, 0, 2 * Math.PI);
+    context.arc(xoff, yoff, a/2, 0, 2 * Math.PI)
     context.stroke()
   }
 }
@@ -77,7 +77,7 @@ function circle5(x, y, r){
     context.beginPath()
     const xoff = Math.cos(rt) * (r-a/2) + x
     const yoff = Math.sin(rt) * (r-a/2) + y
-    context.arc(xoff, yoff, a/2, 0, 2 * Math.PI);
+    context.arc(xoff, yoff, a/2, 0, 2 * Math.PI)
     context.stroke()
   }
 }
@@ -90,7 +90,7 @@ function circle6(x, y, r){
       context.beginPath()
       const xoff = Math.cos(rt) * (r-a/2) + x
       const yoff = Math.sin(rt) * (r-a/2) + y
-      context.arc(xoff, yoff, a/2, 0, 2 * Math.PI);
+      context.arc(xoff, yoff, a/2, 0, 2 * Math.PI)
       context.stroke()
     }
   }
@@ -147,6 +147,55 @@ function circle9(x, y, r){
   }
 }
 
+// fill with circles
+function circle10(x, y, r){
+  let rt = Math.random()*Math.PI*2
+  for(let a=0.3; a<2*r; a+=Math.random()*2+a/20){
+    context.beginPath()
+    const xoff = Math.cos(rt) * (r-a/2) + x
+    const yoff = Math.sin(rt) * (r-a/2) + y
+    context.arc(xoff, yoff, a/2, 0, 2 * Math.PI)
+    context.stroke()
+  }
+}
+
+// fill with circles
+function circle11(x, y, r){
+  let rt = Math.random()*(Math.PI/4)
+  let ii=0.01
+  for(let a=0.3; a<2*r; a+=7){
+    context.beginPath()
+    const xoff = Math.cos(rt) * (r-a/2) + x
+    const yoff = Math.sin(rt) * (r-a/2) + y
+    context.arc(xoff, yoff, a/2, 0, 2 * Math.PI)
+    context.stroke()
+  }
+}
+
+function circle12(x, y, r){
+  let rt = Math.random()*(Math.PI/2)
+  for(let a=0.3; a<2*r; a+=Math.random()*20+1){
+    context.beginPath()
+    const xoff = Math.cos(rt) * (r-a/2) + x
+    const yoff = Math.sin(rt) * (r-a/2) + y
+    context.arc(xoff, yoff, a/2, 0, 2 * Math.PI)
+    context.stroke()
+  }
+}
+
+// fill with circles
+function circle13(x, y, r){
+  for(let a=0; a<10; a++){
+    let nr = Math.random()*(r-1)+1;
+    let rt = Math.random()*Math.PI*2
+    context.beginPath()
+    const xoff = Math.cos(rt) * nr + x
+    const yoff = Math.sin(rt) * nr + y
+    context.arc(xoff, yoff, (r-nr), 0, 2 * Math.PI)
+    context.stroke()
+  }
+}
+
 function resize() {
   pixelRatio = window.devicePixelRatio
   width = window.innerWidth
@@ -172,9 +221,10 @@ function draw(){
 
   context.strokeStyle = 'rgba(0,0,0,0.2)'
   // circle2(0, 0, 400, tIncrement)
-  circle9(0, 0, 400, tIncrement)
+  circle1(0, 0, 400, tIncrement)
+  circle13(0, 0, 400, tIncrement)
 
-  counter+=0.01;
+  counter+=0.04;
 }
 
 function animate(){
