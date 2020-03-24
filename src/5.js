@@ -353,8 +353,6 @@ function circle25(x, y, r){
     let r2 = Math.random()*r
     let r3 = Math.random()*r
 
-
-
     let cx1 = x + r1 * Math.cos(rt1)
     let cy1 = x + r1 * Math.sin(rt1)
     let cx2 = x + r2 * Math.cos(rt2)
@@ -371,6 +369,67 @@ function circle25(x, y, r){
   }
 }
 
+function circle26(x, y, r){
+  let rt = Math.random()*Math.PI*2
+  let sx1 = x + r * Math.cos(rt);
+  let sy1 = y + r * Math.sin(rt);
+  let sx2 = x + r * Math.cos(rt + Math.PI);
+  let sy2 = y + r * Math.sin(rt + Math.PI);
+  let step = 10
+  context.beginPath()
+  context.moveTo(sx1, sy1)
+  context.lineTo(sx2, sy2)
+  context.stroke()
+  for (let i = step; i < r; i+=step) {
+   context.save()
+   context.translate(x, y)
+   context.rotate(rt)
+   context.translate(0, -i)
+   let l = Math.sqrt(r * r - i * i)
+   context.beginPath()
+   context.moveTo(l, 0)
+   context.lineTo(-l, 0)
+   context.stroke()
+   context.translate(0, 2*i)
+   context.beginPath()
+   context.moveTo(l, 0)
+   context.lineTo(-l, 0)
+   context.stroke()
+   context.restore()
+  }
+}
+
+function circle27(x, y, r){
+  let rt = Math.random()*Math.PI*2
+  let sx1 = x + r * Math.cos(rt);
+  let sy1 = y + r * Math.sin(rt);
+  let sx2 = x + r * Math.cos(rt + Math.PI);
+  let sy2 = y + r * Math.sin(rt + Math.PI);
+  let step = 50
+  context.beginPath()
+  context.moveTo(sx1, sy1)
+  context.lineTo(sx2, sy2)
+  context.stroke()
+  for (let i = step; i < r; i+=step) {
+   context.save()
+   context.translate(x, y)
+   context.rotate(rt)
+   context.translate(0, -i)
+   let l = Math.sqrt(r * r - i * i)
+   context.beginPath()
+   context.moveTo(l, 0)
+   context.lineTo(-l, 0)
+   context.stroke()
+   context.translate(0, 2*i)
+   context.beginPath()
+   context.moveTo(l, 0)
+   context.lineTo(-l, 0)
+   context.stroke()
+   context.restore()
+   i-=i*.1
+  }
+}
+
 function resize() {
   pixelRatio = window.devicePixelRatio
   width = window.innerWidth
@@ -384,21 +443,20 @@ function resize() {
 function draw(){
   // background
   context.globalAlpha = 0.04;
-  context.translate(-canvas.width/2, -canvas.height/2)
   context.fillStyle = 'white'
   context.fillRect(0, 0, canvas.width, canvas.height)
 
   // circle
-  context.translate(canvas.width/2, canvas.height/2)
   context.globalAlpha = 1;
   // circle1(0, 0, 400)
   let tIncrement = map_range(Math.sin(counter), -1, 1, 0.05, 0.4)
-
   context.strokeStyle = 'rgba(0,0,0,0.2)'
 
   // draw
-  circle25(0, 0, 400, tIncrement)
-
+  context.save()
+  context.translate(canvas.width/2, canvas.height/2)
+  circle27(0, 0, 400, tIncrement)
+  context.restore()
   counter+=0.04;
 }
 
@@ -415,16 +473,14 @@ function init(){
   context.lineWidth = pixelRatio
   context.lineJoin = 'round'
 
-  context.fillStyle = 'black';
+  context.fillStyle = 'white';
   context.fillRect(0, 0, canvas.width, canvas.height);
-
-  context.translate(canvas.width/2, canvas.height/2)
   draw()
 }
 
 
 init()
-animate()
+// animate()
 
 window.addEventListener('resize', init, false)
 window.addEventListener("mousedown", stop, { passive: false });
