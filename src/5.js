@@ -9,6 +9,7 @@ const context = canvas.getContext('2d')
 let width, height, pixelRatio
 let counter = 1
 let isRun = true
+let functionNum = 1
 // method
 function map_range(value, low1, high1, low2, high2) {
     return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
@@ -22,10 +23,13 @@ function counting(){
 
 // simple circle
 function circle1(x, y, r){
+  let xshift = Math.random()*20
+  let yshift = Math.random()*20
   context.beginPath()
   for(let a=0; a<Math.PI*2; a+=Math.PI*2/180){
-    const xoff = Math.cos(a) * r + x
-    const yoff = Math.sin(a) * r + y
+
+    const xoff = Math.cos(a) * r + x + xshift
+    const yoff = Math.sin(a) * r + y + yshift
     context.lineTo(xoff, yoff)
   }
   context.stroke()
@@ -405,28 +409,132 @@ function circle27(x, y, r){
   let sy1 = y + r * Math.sin(rt);
   let sx2 = x + r * Math.cos(rt + Math.PI);
   let sy2 = y + r * Math.sin(rt + Math.PI);
-  let step = 50
+  let step = 28
   context.beginPath()
   context.moveTo(sx1, sy1)
   context.lineTo(sx2, sy2)
   context.stroke()
   for (let i = step; i < r; i+=step) {
    context.save()
+
+   let l = Math.sqrt(r * r - i * i)
+
    context.translate(x, y)
    context.rotate(rt)
    context.translate(0, -i)
-   let l = Math.sqrt(r * r - i * i)
+
+   // draw line
    context.beginPath()
    context.moveTo(l, 0)
    context.lineTo(-l, 0)
    context.stroke()
+
    context.translate(0, 2*i)
+   //
+   // draw line
    context.beginPath()
    context.moveTo(l, 0)
    context.lineTo(-l, 0)
    context.stroke()
+
    context.restore()
-   i-=i*.1
+
+   if(step>3){
+     step-=1
+   }
+  }
+}
+
+function circle28(x, y, r){
+  let rt = Math.random()*Math.PI*2
+  context.save()
+  context.translate(x, y)
+  context.rotate(rt)
+  let step = 20
+  for(let dist=0; dist<r; dist+=step){
+    //calculate the angle
+    let theta = Math.asin(dist / r);
+    //calculate x,y based on the angle
+    let x1 = r * Math.cos(theta);
+    let y1 = r * Math.sin(theta);
+    //get the opposite side of the circle
+    let x2 = -1 * x1;
+    let y2 = y1;
+    //get the corresponding top half line
+    let x3 = x1;
+    let y3 = -1 * y1;
+    let x4 = x2;
+    let y4 = -1 * y2;
+    //draw the lines
+    context.beginPath()
+    context.moveTo(x1, y1)
+    context.lineTo(x2, y2)
+    context.stroke()
+    //avoid drawing the center line twice in case alpha is used in the stroke color
+    if (dist > 0) {
+      context.beginPath()
+      context.moveTo(x3, y3)
+      context.lineTo(x4, y4)
+      context.stroke()
+    }
+  }
+  context.restore()
+}
+
+function dashed_line(r, l) {
+  let k = -l
+  let blank = true
+  if (Math.random() > 0.8){
+    blank = false
+  }
+
+  while (k < l) {
+    let nk;
+    blank = !blank;
+    if (!blank) {
+      nk = k + Math.random() *r/2 + r/10
+      if (nk > l)
+      {
+        nk = l;
+      }
+      context.beginPath()
+      context.moveTo(k, 0)
+      context.lineTo(nk, 0)
+      context.stroke()
+    } else {
+      nk = k + Math.random() *r/20 + r/10
+    }
+    k = nk;
+  }
+}
+
+function circle29(x, y, r){
+  let rt = Math.random()*Math.PI*2
+  let step = 28
+
+  context.save()
+  context.translate(x, y)
+  context.rotate(rt)
+  dashed_line(r, r)
+  context.restore()
+  for (let i = step; i < r; i+=step) {
+   context.save()
+
+   let l = Math.sqrt(r * r - i * i)
+
+   context.translate(x, y)
+   context.rotate(rt)
+   context.translate(0, -i)
+
+   // draw line
+   dashed_line(r, l)
+
+   context.translate(0, 2*i)
+   //
+   // draw line
+   dashed_line(r, l)
+
+   context.restore()
   }
 }
 
@@ -442,7 +550,7 @@ function resize() {
 
 function draw(){
   // background
-  context.globalAlpha = 0.04;
+  context.globalAlpha = 0.5;
   context.fillStyle = 'white'
   context.fillRect(0, 0, canvas.width, canvas.height)
 
@@ -455,7 +563,9 @@ function draw(){
   // draw
   context.save()
   context.translate(canvas.width/2, canvas.height/2)
-  circle27(0, 0, 400, tIncrement)
+  // circle28(0, 0, 400, tIncrement)
+  eval('circle'+functionNum+'(0,0,400,tIncrement)')
+  context.strokeText('#'+functionNum, 0, 500);
   context.restore()
   counter+=0.04;
 }
@@ -472,6 +582,8 @@ function init(){
   resize();
   context.lineWidth = pixelRatio
   context.lineJoin = 'round'
+  context.textAlign = 'center'
+  context.font = "64px sans-serif"
 
   context.fillStyle = 'white';
   context.fillRect(0, 0, canvas.width, canvas.height);
@@ -480,8 +592,19 @@ function init(){
 
 
 init()
-// animate()
+animate()
 
+
+function keyDown(event){
+  const keyName = event.key;
+  if (keyName === 'ArrowLeft' && functionNum > 1) {
+    functionNum --
+  }
+  else if(keyName === 'ArrowRight' && functionNum < 29){
+    functionNum ++
+  }
+}
+document.addEventListener('keydown', keyDown);
 window.addEventListener('resize', init, false)
 window.addEventListener("mousedown", stop, { passive: false });
 window.addEventListener("touchstart", stop, { passive: false });
