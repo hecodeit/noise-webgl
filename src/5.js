@@ -309,7 +309,7 @@ function circle20(x, y, r){
 function circle21(x, y, r){
   for(let i=0.2; i<=r; i+=Math.random()*30.34){
     context.beginPath()
-    context.arc(y, y, i, 0, 2 * Math.PI)
+    context.arc(x, y, i, 0, 2 * Math.PI)
     context.stroke()
   }
 }
@@ -329,7 +329,7 @@ function circle22(x, y, r, tIncrement){
 function circle23(x, y, r, tIncrement){
   for(let i=0.2; i<=r; i+=Math.random()*30.34){
     context.beginPath()
-    context.arc(y, y, i, Math.random()*Math.PI, Math.random()*Math.PI*2)
+    context.arc(x, y, i, Math.random()*Math.PI, Math.random()*Math.PI*2)
     context.stroke()
   }
 }
@@ -538,6 +538,42 @@ function circle29(x, y, r){
   }
 }
 
+function circle30(x, y, r){
+  let rt = Math.random()*Math.PI*2
+  let step = 20
+  for(let dist=0; dist<r; dist+=step){
+    //calculate the angle
+    let theta = Math.asin(dist / r)+rt
+    //calculate x,y based on the angle
+    let x1 = r * Math.cos(theta)
+    let y1 = r * Math.sin(theta)
+    //get the opposite side of the circle
+    let theta2 = Math.asin(dist / r)-rt
+    let x2 = r * Math.cos(theta2-Math.PI)
+    let y2 = r * Math.sin(theta2)
+    //get the corresponding top half line
+    let theta3 = Math.asin(dist / r)+rt+Math.PI
+    let x3 = r * Math.cos(theta3)
+    let y3 = r * Math.sin(theta3)
+
+    let theta4 = Math.asin(dist / r)-rt+Math.PI
+    let x4 = r * Math.cos(theta4-Math.PI)
+    let y4 = r * Math.sin(theta4)
+    //draw the lines
+    context.beginPath()
+    context.moveTo(x1, y1)
+    context.lineTo(x2, y2)
+    context.stroke()
+    //avoid drawing the center line twice in case alpha is used in the stroke color
+    if (dist > 0) {
+      context.beginPath()
+      context.moveTo(x3, y3)
+      context.lineTo(x4, y4)
+      context.stroke()
+    }
+  }
+}
+
 function resize() {
   pixelRatio = window.devicePixelRatio
   width = window.innerWidth
@@ -600,7 +636,7 @@ function keyDown(event){
   if (keyName === 'ArrowLeft' && functionNum > 1) {
     functionNum --
   }
-  else if(keyName === 'ArrowRight' && functionNum < 29){
+  else if(keyName === 'ArrowRight' && functionNum < 30){
     functionNum ++
   }
 }

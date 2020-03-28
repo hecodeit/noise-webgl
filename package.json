@@ -20,7 +20,8 @@
   "homepage": "https://github.com/hecodeit/noise-webgl#readme",
   "devDependencies": {
     "@babel/preset-env": "^7.8.7",
-    "babelify": "^10.0.0"
+    "babelify": "^10.0.0",
+    "simple-html-index": "hecodeit/simple-html-index"
   },
   "dependencies": {
     "@babel/core": "^7.8.7",
