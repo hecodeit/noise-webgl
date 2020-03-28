@@ -574,6 +574,136 @@ function circle30(x, y, r){
   }
 }
 
+function circle31(x, y, r) {
+  for (let i = 0; i < 360; i+=1) {
+    let sx = x;
+    let sy = y;
+    context.beginPath()
+    for (let j = 0; j < r; j += 10) {
+      let nx = x + j * Math.cos(i* (Math.PI/180)) + Math.random()*r/20 - r/10;
+      let ny = y + j * Math.sin(i* (Math.PI/180)) + Math.random()*r/20 - r/10;
+      context.lineTo(nx, ny)
+      sx = nx;
+      sy = ny;
+    }
+    context.stroke()
+
+  }
+}
+
+function circle32(x, y, r) {
+  for (let k = 0; k < 50; k++) {
+    let i = r;
+    let t = Math.random()*Math.PI*2
+    context.beginPath()
+    while (i >= 0) {
+      context.lineTo(x + i * Math.cos(t), y + i * Math.sin(t))
+      i -= 4;
+      t += .1;
+    }
+    context.stroke()
+  }
+}
+
+function circle33(x, y, r) {
+  for (let k = 0; k < 50; k++) {
+    let i = r;
+    let t = Math.random()*Math.PI*2
+    context.beginPath()
+    while (i >= -r) {
+      context.lineTo(x + i * Math.cos(t), y + i * Math.sin(t))
+      i -= 10;
+      t += .1;
+    }
+    context.stroke()
+  }
+}
+
+
+function circle34(x, y, r){
+  let rt = Math.random()*Math.PI*2
+  let step = r/20+2
+  for(let dist=0; dist<r; dist+=step){
+    //calculate the angle
+    let theta = Math.asin(dist / r)+rt
+    //calculate x,y based on the angle
+    let x1 = r * Math.cos(theta)
+    let y1 = r * Math.sin(theta)
+    //get the opposite side of the circle
+    let theta2 = Math.asin(dist / r)-rt
+    let x2 = r * Math.cos(theta2-Math.PI)
+    let y2 = r * Math.sin(theta2)
+    //get the corresponding top half line
+    let theta3 = Math.asin(dist / r)+rt+Math.PI
+    let x3 = r * Math.cos(theta3)
+    let y3 = r * Math.sin(theta3)
+
+    let theta4 = Math.asin(dist / r)-rt+Math.PI
+    let x4 = r * Math.cos(theta4-Math.PI)
+    let y4 = r * Math.sin(theta4)
+    //draw the lines
+    context.beginPath()
+    context.moveTo(x, y)
+    context.lineTo(x1, y1)
+    context.lineTo(x2, y2)
+    context.closePath()
+    context.stroke()
+    //avoid drawing the center line twice in case alpha is used in the stroke color
+    if (dist > 0) {
+      context.beginPath()
+      context.moveTo(x, y)
+      context.lineTo(x3, y3)
+      context.lineTo(x4, y4)
+      context.closePath()
+      context.stroke()
+    }
+  }
+}
+
+function circle35(x, y, r){
+  let rt = Math.random()*Math.PI*2
+  let cx = x + r * Math.cos(rt)
+  let cy = y + r * Math.sin(rt)
+  for (let i = rt; i <= Math.PI*2+rt; i+=Math.PI*2/400) {
+    let nx = x + r * Math.cos(i)
+    let ny = y + r * Math.sin(i)
+    context.beginPath()
+    context.moveTo(cx, cy)
+    context.lineTo(nx, ny)
+    context.stroke()
+  }
+}
+
+function circle36(x, y, r){
+  let rt = Math.random()*Math.PI*2
+  let rr = Math.random() * r
+  let cx = x + rr * Math.cos(rt)
+  let cy = y + rr * Math.sin(rt)
+  for (let i = rt; i <= Math.PI*2+rt-0.01; i+=Math.PI*2/360) {
+    let nx = x + r * Math.cos(i)
+    let ny = y + r * Math.sin(i)
+    context.beginPath()
+    context.moveTo(cx, cy)
+    context.lineTo(nx, ny)
+    context.stroke()
+  }
+}
+
+function circle37(x, y, r){
+  let rt = Math.random()*Math.PI*2
+  let rr = (r+20) * Math.sqrt(Math.random())
+  let cx = x + rr * Math.cos(rt)
+  let cy = y + rr * Math.sin(rt)
+  for (let i = rt; i <= Math.PI*2+rt-0.01; i+=Math.PI*2/360) {
+    let nx = x + r * Math.cos(i)
+    let ny = y + r * Math.sin(i)
+    context.beginPath()
+    context.moveTo(cx, cy)
+    context.lineTo(nx, ny)
+    context.stroke()
+  }
+}
+
 function resize() {
   pixelRatio = window.devicePixelRatio
   width = window.innerWidth
@@ -636,7 +766,7 @@ function keyDown(event){
   if (keyName === 'ArrowLeft' && functionNum > 1) {
     functionNum --
   }
-  else if(keyName === 'ArrowRight' && functionNum < 30){
+  else if(keyName === 'ArrowRight' && functionNum < 37){
     functionNum ++
   }
 }
