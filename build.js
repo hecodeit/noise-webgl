@@ -7,7 +7,9 @@ const html = require('simple-html-index')
 
 // get entry
 var entry = argv._[0]
+var title = argv._[1]
 if (!entry) { entry = '1'}
+if (!title) { title = entry}
 const entryFilename = entry + '.js'
 const entryFile = path.resolve(__dirname, 'src', entryFilename)
 
@@ -19,5 +21,5 @@ b.transform(uglifyify, { global: true  })
 b.bundle()
 .pipe(fs.createWriteStream('static/' + entryFilename))
 
-html({ title: entry, entry: entryFilename, css: '../main.css' })
+html({ title: title, entry: entryFilename, css: '../main.css' })
   .pipe(fs.createWriteStream('static/' + entry + '.html'))
