@@ -3,4 +3,5 @@
 ```
 npm run start 2
 npm run build 2
+npm run build 2 title '../touch-icon.png'
 ```
