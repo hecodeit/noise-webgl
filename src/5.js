@@ -704,6 +704,69 @@ function circle37(x, y, r){
   }
 }
 
+function circle38(x, y, r) {
+  let step = 4;
+
+  for (let k = 0; k < 100; k++) {
+    let ox = x;
+    let oy = y;
+    let rt = Math.random()*Math.PI*2;
+    for (let rad = step; rad < r; rad += step) {
+      let nx = x + rad *  Math.cos(rt);
+      let ny = y + rad *  Math.sin(rt);
+      context.beginPath()
+      context.moveTo(ox, oy)
+      context.lineTo(nx, ny)
+      context.stroke()
+      ox = nx;
+      oy = ny;
+      rt += Math.random()*.2-.1
+    }
+  }
+}
+
+function circle39(x, y, r) {
+  let step = 4;
+
+  for (let k = 0; k < 10; k++) {
+    let ox = x;
+    let oy = y;
+    let rt = Math.random()*Math.PI*2;
+    for (let rad = step; rad < r; rad += step) {
+      let nx = x + rad *  Math.cos(rt);
+      let ny = y + rad *  Math.sin(rt);
+      context.beginPath()
+      context.moveTo(ox, oy)
+      context.lineTo(nx, ny)
+      context.stroke()
+      ox = nx;
+      oy = ny;
+      rt += Math.random()*3-1.5
+    }
+  }
+}
+
+function circle40(x, y, r) {
+  let step = 4;
+
+  for (let k = 0; k < 10; k++) {
+    let ox = x;
+    let oy = y;
+    let rt = Math.random()*Math.PI*2;
+    for (let rad = step; rad < r; rad += step) {
+      let nx = x + rad *  Math.cos(rt);
+      let ny = y + rad *  Math.sin(rt);
+      context.beginPath()
+      context.moveTo(ox, oy)
+      context.lineTo(nx, ny)
+      context.stroke()
+      ox = nx;
+      oy = ny;
+      rt += Math.random()*6-3
+    }
+  }
+}
+
 function resize() {
   pixelRatio = window.devicePixelRatio
   width = window.innerWidth
@@ -766,7 +829,7 @@ function keyDown(event){
   if (keyName === 'ArrowLeft' && functionNum > 1) {
     functionNum --
   }
-  else if(keyName === 'ArrowRight' && functionNum < 37){
+  else if(keyName === 'ArrowRight' && functionNum < 40){
     functionNum ++
   }
 }
