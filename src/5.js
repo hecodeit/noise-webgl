@@ -575,13 +575,13 @@ function circle30(x, y, r){
 }
 
 function circle31(x, y, r) {
-  for (let i = 0; i < 360; i+=1) {
+  for (let i = 0; i < 360; i+=2) {
     let sx = x;
     let sy = y;
     context.beginPath()
-    for (let j = 0; j < r; j += 10) {
-      let nx = x + j * Math.cos(i* (Math.PI/180)) + Math.random()*r/20 - r/10;
-      let ny = y + j * Math.sin(i* (Math.PI/180)) + Math.random()*r/20 - r/10;
+    for (let j = 0; j < r; j += 20) {
+      let nx = x + j * Math.cos(i* (Math.PI/180)) + Math.random()*r/20 - r/40;
+      let ny = y + j * Math.sin(i* (Math.PI/180)) + Math.random()*r/20 - r/40;
       context.lineTo(nx, ny)
       sx = nx;
       sy = ny;
@@ -707,7 +707,7 @@ function circle37(x, y, r){
 function circle38(x, y, r) {
   let step = 4;
 
-  for (let k = 0; k < 100; k++) {
+  for (let k = 0; k < 50; k++) {
     let ox = x;
     let oy = y;
     let rt = Math.random()*Math.PI*2;
@@ -767,6 +767,248 @@ function circle40(x, y, r) {
   }
 }
 
+function circle41(x, y, r) {
+  let step = r/9;
+
+  for (let k = 0; k < 1; k++) {
+    let ox = x;
+    let oy = y;
+    let rt = Math.random()*Math.PI*2;
+    let rad = 0;
+    for (let n = 0; n < 1000; n ++) {
+      let nx = x + rad *  Math.cos(rt);
+      let ny = y + rad *  Math.sin(rt);
+      context.beginPath()
+      context.moveTo(ox, oy)
+      context.lineTo(nx, ny)
+      context.stroke()
+      ox = nx;
+      oy = ny;
+      rt += Math.random()*.1-.01
+      if (rad >= r || rad < 0){
+        step = -step;
+      }
+      rad +=step;
+    }
+  }
+}
+
+function circle42(x, y, r, tIncrement) {
+  let step = r/9;
+
+  for (let k = 0; k < 1; k++) {
+    let ox = x;
+    let oy = y;
+    let rt = Math.random()*Math.PI*2;
+    let rad = 0;
+    for (let n = 0; n < 1000; n ++) {
+      let nx = x + rad *  Math.cos(rt);
+      let ny = y + rad *  Math.sin(rt);
+      context.beginPath()
+      context.moveTo(ox, oy)
+      context.lineTo(nx, ny)
+      context.stroke()
+      ox = nx;
+      oy = ny;
+      rt += Math.random()*tIncrement
+      if (rad >= r || rad < 0){
+        step = -step;
+        rad-=2;
+      }
+      rad +=step;
+    }
+  }
+}
+
+function circle43(x, y, r) {
+  let step = r/18;
+
+  for (let k = 0; k < 1; k++) {
+    let ox = x;
+    let oy = y;
+    let rt = Math.random()*Math.PI*2;
+    let rad = 0;
+    for (let n = 0; n < 1000; n +=2) {
+      let nx = x + rad *  Math.cos(rt);
+      let ny = y + rad *  Math.sin(rt);
+      context.beginPath()
+      context.arc(nx, ny, r/100, 0, 2 * Math.PI)
+      context.stroke()
+      ox = nx;
+      oy = ny;
+      rt += Math.random()*.1-.01
+      if (rad >= r || rad < 0){
+        step = -step;
+      }
+      rad +=step;
+    }
+  }
+}
+
+function circle44(x, y, r) {
+  let step = 10;
+  let rt1 = Math.random()*Math.PI*2;
+  let rt2 = Math.PI + rt1;
+  let rt = Math.random()*Math.PI*2/10;
+  let max = 5;
+  for (let n = 0; n < max; rt += Math.PI*2/max, n++) {
+    for (let k = 0; k < 10; k++) {
+      let ox = x;
+      let oy = y;
+      let z = rt;
+
+      for (let rad = step; rad < r; rad += step) {
+        let nx = x + rad * Math.cos(z);
+        let ny = y + rad * Math.sin(z);
+        context.beginPath()
+        context.moveTo(ox, oy)
+        context.lineTo(nx, ny)
+        context.stroke()
+        ox = nx;
+        oy = ny;
+        let change = map_range(rad, 0, r, Math.PI/180, Math.PI/18);
+        z +=  Math.random()* change*2 -  change;
+      }
+    }
+  }
+}
+
+function circle45(x, y, r) {
+  let sw = 1;
+  for (let k = 0; k < 100; k++) {
+    let nr = Math.random()*r/4 + 3*r/4;
+    let t = Math.random()*Math.PI*2;
+    let nx = x + nr * Math.cos(t);
+    let ny = y + nr * Math.sin(t);
+    let rr = Math.random()*r/4 + r/10;
+    context.beginPath()
+    context.arc(nx, ny, rr/2, 0, Math.PI*2)
+    context.stroke()
+  }
+}
+
+function circle46(x, y, r){
+  let step = 72
+  let lineLenght = 20
+  for(let a=0; a<Math.PI*2-0.01; a+=Math.PI*2/step){
+    let newx = x + r * Math.cos(a);
+    let newy = y + r * Math.sin(a);
+
+    let newAngel = Math.random()*Math.PI*2;
+    let ox = newx + lineLenght * Math.cos(newAngel);
+    let oy = newy + lineLenght * Math.sin(newAngel);
+    let nx = newx + lineLenght * Math.cos(newAngel+Math.PI);
+    let ny = newy + lineLenght * Math.sin(newAngel+Math.PI);
+    context.beginPath()
+    context.moveTo(ox, oy)
+    context.lineTo(nx, ny)
+    context.stroke()
+  }
+}
+
+function circle47(x, y, r){
+  let lineLenght = 20
+  for(let a=0; a<500; a++){
+    let nr = Math.random()*r
+    let rt = Math.random()*(Math.PI*2)
+    const xoff = Math.cos(rt) * nr + x
+    const yoff = Math.sin(rt) * nr + y
+
+    let newAngel = Math.random()*Math.PI*2;
+    let ox = xoff + lineLenght * Math.cos(newAngel);
+    let oy = yoff + lineLenght * Math.sin(newAngel);
+    let nx = xoff + lineLenght * Math.cos(newAngel+Math.PI);
+    let ny = yoff + lineLenght * Math.sin(newAngel+Math.PI);
+    context.beginPath()
+    context.moveTo(ox, oy)
+    context.lineTo(nx, ny)
+    context.stroke()
+  }
+}
+
+function circle48(x, y, r){
+  let lineLenght = 20
+  for(let a=0; a<500; a++){
+    let rt = r * Math.sqrt(Math.random())
+    let theta = Math.random() * Math.PI * 2
+    const xoff = Math.cos(theta) * rt + x
+    const yoff = Math.sin(theta) * rt + y
+
+
+    let newAngel = Math.random()*Math.PI*2;
+    let ox = xoff + lineLenght * Math.cos(newAngel);
+    let oy = yoff + lineLenght * Math.sin(newAngel);
+    let nx = xoff + lineLenght * Math.cos(newAngel+Math.PI);
+    let ny = yoff + lineLenght * Math.sin(newAngel+Math.PI);
+    context.beginPath()
+    context.moveTo(ox, oy)
+    context.lineTo(nx, ny)
+    context.stroke()
+  }
+}
+
+function circle49(x, y, r){
+  context.beginPath()
+  for(let a=0; a<Math.PI*2; a+=Math.PI*2/360){
+    let rShift = Math.random()*100-50;
+    const xoff = Math.cos(a) * (r + rShift) + x
+    const yoff = Math.sin(a) * (r + rShift) + y
+    context.lineTo(xoff, yoff)
+  }
+  context.closePath()
+  context.stroke()
+}
+
+function circle50(x, y, r, tIncrement){
+  let i=0;
+  let j=0;
+  let sideCount = Math.round(Math.random()*40-10)
+  context.beginPath()
+  for(let a=0; a<Math.PI*2; a+=Math.PI*2/360){
+    let rShift = Math.sin(i+j)*40-20;
+
+    // sin loop
+    const offset = map_range(Math.sin(a * sideCount + 36/sideCount+tIncrement), -1, 1, 1, 1.2)
+    const radius = 400 * offset + map_range(Math.sin(tIncrement), -1, 1, -200, 0)
+
+    const xoff = Math.cos(a) * radius + x
+    const yoff = Math.sin(a) * radius + y
+    context.lineTo(xoff, yoff)
+  }
+  context.closePath()
+  context.stroke()
+}
+
+function circle51(x, y, r) {
+  for (let i = 0; i <= Math.floor(2 * Math.PI * 100); i++) {
+    let rt1 = Math.random() * Math.PI * 2
+    let rt2 = Math.random() * Math.PI * 2
+    let cx1 = x + r * Math.cos(rt1);
+    let cy1 = y + r * Math.sin(rt1);
+
+    let cx2 = x + r * Math.cos(rt2);
+    let cy2 = y + r * Math.sin(rt2);
+    context.beginPath()
+    context.moveTo(cx1, cy1)
+    context.lineTo(cx2, cy2)
+    context.stroke()
+  }
+}
+
+function circle52(x, y, r) {
+  let sw = 0.5;
+  for (let k = 0; k < 300; k++) {
+    let start = Math.random()* Math.PI * 4 -  Math.PI * 2;
+    let nr = Math.random()* (r-1)/2 + 1;
+    let t = Math.random()* Math.PI * 2
+    let nx = x + nr * Math.cos(t);
+    let ny = y + nr * Math.sin(t);
+    context.beginPath()
+    context.arc(nx, ny, (r-nr), start, start +  Math.random()*Math.PI*2-Math.PI)
+    context.stroke()
+  }
+}
+
 function resize() {
   pixelRatio = window.devicePixelRatio
   width = window.innerWidth
@@ -788,6 +1030,7 @@ function draw(){
   // circle1(0, 0, 400)
   let tIncrement = map_range(Math.sin(counter), -1, 1, 0.05, 0.4)
   context.strokeStyle = 'rgba(0,0,0,0.2)'
+  context.lineCap = 'round'
 
   // draw
   context.save()
@@ -809,7 +1052,7 @@ function animate(){
 
 function init(){
   resize();
-  context.lineWidth = pixelRatio
+  context.lineWidth = pixelRatio*2
   context.lineJoin = 'round'
   context.textAlign = 'center'
   context.font = "64px sans-serif"
@@ -829,7 +1072,7 @@ function keyDown(event){
   if (keyName === 'ArrowLeft' && functionNum > 1) {
     functionNum --
   }
-  else if(keyName === 'ArrowRight' && functionNum < 40){
+  else if(keyName === 'ArrowRight' && functionNum < 52){
     functionNum ++
   }
 }
